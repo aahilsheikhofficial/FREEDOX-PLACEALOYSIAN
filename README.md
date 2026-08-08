@@ -8,7 +8,7 @@ The system provides separate interfaces for **Faculty** and **Students**, while 
 
 ---
 
-# 📌 Problem Statement
+#  Problem Statement
 
 Institutions need to analyze and document placement outcomes such as:
 
@@ -23,13 +23,12 @@ Institutions need to analyze and document placement outcomes such as:
 
 Traditional placement tracking using spreadsheets or disconnected systems can make it difficult to maintain accurate student-wise placement histories and generate reliable reports.
 
-The goal is to build a **Placement Offer Management System** on top of the existing **Company and Placement Drive concepts from V05**, allowing institutions to track individual student offers and placement outcomes.
+
 
 ---
 
-# 🎯 Project Objective
+# Project Objective
 
-The objective of **Pink Pandas** is to develop a simple, reliable and user-friendly system that allows:
 
 * Faculty to manage student placement information.
 * Faculty to create and update placement offers.
@@ -40,11 +39,11 @@ The objective of **Pink Pandas** is to develop a simple, reliable and user-frien
 
 ---
 
-# 👥 User Interfaces
+#  User Interfaces
 
-The system contains two completely separate spaces.
 
-## 👨‍🏫 Faculty Space
+
+## Faculty Space
 
 Faculty can:
 
@@ -62,7 +61,7 @@ Faculty can:
 * Manage companies and placement drives
 * View placement analytics
 
-## 👨‍🎓 Student Space
+##  Student Space
 
 Students can view only their own information:
 
@@ -77,7 +76,7 @@ Students cannot view or modify other students' information.
 
 ---
 
-# 🔄 Faculty Workflow
+# Faculty Workflow
 
 ```text
 Faculty
@@ -101,7 +100,7 @@ Offer Details
 
 ---
 
-# 🎓 Student Workflow
+#  Student Workflow
 
 ```text
 Student
@@ -119,7 +118,7 @@ My Offers
 
 ---
 
-# 🗃️ Core Entities
+#  Core Entities
 
 The system uses the following entities:
 
@@ -137,27 +136,7 @@ The system uses the following entities:
 
 ---
 
-# 🔗 ER Relationship
-
-The important placement relationships are:
-
-```text
-Company
-   │
-   │ 1 : N
-   ↓
-Placement Drive
-   │
-   │ 1 : N
-   ↓
-Offer
-   ↑
-   │ N : 1
-   │
-Student
-```
-
-### Relationship Explanation
+###  ER Relationship Explanation
 
 * One **Company** can have multiple Placement Drives.
 * One **Placement Drive** can generate multiple Offers.
@@ -175,7 +154,7 @@ Mansi
 
 ---
 
-# 📊 Required Data
+# Required Data
 
 The system captures:
 
@@ -188,7 +167,7 @@ The system captures:
 
 ---
 
-# 📈 Placement Analytics
+# Placement Analytics
 
 The system dynamically calculates:
 
@@ -228,7 +207,7 @@ All statistics are calculated dynamically from the database.
 
 ---
 
-# 💼 Offer Management
+#  Offer Management
 
 Faculty can create an offer using an existing Placement Drive.
 
@@ -254,7 +233,7 @@ The Company should be derived from the selected Placement Drive to prevent incor
 
 ---
 
-# 🛡️ Business Rules
+#  Business Rules
 
 The system enforces the following rules:
 
@@ -271,7 +250,7 @@ The system enforces the following rules:
 
 ---
 
-# 🧑‍🎓 Faculty Student Management
+#  Faculty Student Management
 
 After selecting:
 
@@ -313,7 +292,7 @@ Faculty can search using:
 
 ---
 
-# 👤 Student Profile
+# Student Profile
 
 Faculty can open any student profile.
 
@@ -341,7 +320,7 @@ The profile contains:
 
 ---
 
-# 🧪 Acceptance Test
+#  Acceptance Test
 
 The reviewer should be able to perform the following:
 
@@ -376,11 +355,11 @@ Placed Students = 19
 Placement % = 63.33%
 ```
 
-The values must be calculated from the database and must not be hard-coded.
+
 
 ---
 
-# 🧪 Dummy Dataset
+#  Dummy Dataset
 
 The system should contain at least:
 
@@ -409,9 +388,9 @@ Example CTC range:
 
 ---
 
-# 🎨 UI Design
+# UI Design
 
-The application uses a modern and professional college-management interface.
+
 
 ### Faculty UI
 
@@ -447,7 +426,7 @@ Simple and focused interface containing:
 
 ---
 
-# 🔐 Role-Based Access
+#  Role-Based Access
 
 | Feature                    | Faculty | Student |
 | -------------------------- | ------: | ------: |
@@ -467,7 +446,7 @@ Students must only be able to access their own data.
 
 ---
 
-# 📁 Project Structure
+# Project Structure
 
 ```text
 college-placement-management/
@@ -492,7 +471,7 @@ college-placement-management/
 
 ---
 
-# 📚 Documentation
+#  Documentation
 
 The project includes:
 
@@ -521,7 +500,7 @@ Shows:
 
 ---
 
-# 💻 Technology Stack
+#  Technology Stack
 
 > Update this section with the exact technologies used in the final implementation.
 
@@ -536,9 +515,9 @@ Possible stack:
 
 ---
 
-# 🏆 Expected Outcome
+#  Expected Outcome
 
-The final system should provide a single platform where faculty can manage and analyze placement outcomes while students can easily view their own placement information.
+The final system provides a single platform where faculty can manage and analyze placement outcomes while students can easily view their own placement information.
 
 The application demonstrates:
 
@@ -560,7 +539,7 @@ INSIGHT
 
 ---
 
-# 🎥 Live Demonstration
+#  Live Demonstration
 
 The recommended demonstration flow:
 
@@ -602,17 +581,13 @@ My Placement Offers
 
 ---
 
-# 👥 Team
-
-## 🐼 Pink Pandas
+##  Pink Pandas
 
 **Team Name:** Pink Pandas
 
-This project was developed as an academic MVP for demonstrating placement offer management, student placement tracking, and institutional placement analytics.
 
----
 
-# 🎯 Project Goal
+#  Project Goal
 
 > **To build a simple, reliable and user-friendly placement management system that helps institutions track student offers and placement outcomes while providing accurate, real-time placement insights.**
 
