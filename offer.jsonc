@@ -1,0 +1,50 @@
+{
+  "name": "Offer",
+  "type": "object",
+  "properties": {
+    "student_id": {
+      "type": "string",
+      "title": "Student"
+    },
+    "drive_id": {
+      "type": "string",
+      "title": "Placement Drive"
+    },
+    "ctc": {
+      "type": "number",
+      "title": "CTC (LPA)"
+    },
+    "offer_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Offer Date"
+    },
+    "joining_status": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Joined",
+        "Not Joined"
+      ],
+      "title": "Joining Status",
+      "default": "Pending"
+    },
+    "placement_status": {
+      "type": "string",
+      "enum": [
+        "Not Placed",
+        "Placed"
+      ],
+      "title": "Placement Status",
+      "default": "Not Placed"
+    }
+  },
+  "required": [
+    "student_id",
+    "drive_id",
+    "ctc",
+    "offer_date",
+    "joining_status",
+    "placement_status"
+  ]
+}
