@@ -1,532 +1,77 @@
+# Base44 Project
 
-> **Team Name:** Pink Pandas
-> **Project:** Placement Offers & Student Placement Management System
-**project URL: https://placealoysian.base44.app 
-A web-based placement management system designed to help colleges efficiently manage student placement offers, placement drives, company information, and placement outcomes.
+Use this repository to run and edit the app locally, then publish changes back through Base44.
 
-The system provides separate interfaces for **Faculty** and **Students**, while maintaining a centralized placement database.
+Any change pushed to the repo will also be reflected in the Base44 Builder.
 
----
+## Prerequisites
 
- Problem Statement
+1. Clone the repository using the project's Git URL.
+2. Navigate to the project directory.
+3. Install dependencies: `npm install`.
+4. Install the Base44 CLI: `npm install -g base44@latest`.
 
-Institutions need to analyze and document placement outcomes such as:
+See the [Base44 CLI docs](https://docs.base44.com/developers/references/cli/get-started/overview) if you want to run Base44 commands directly.
 
-* Offers extended to students
-* Offers accepted
-* Students placed
-* Joining status
-* Placement percentage
-* Company-wise placement
-* Program-wise placement
-* Salary statistics
+## Run Locally
 
-Traditional placement tracking using spreadsheets or disconnected systems can make it difficult to maintain accurate student-wise placement histories and generate reliable reports.
+Run the full local development environment from the project root:
 
-The goal is to build a **Placement Offer Management System** on top of the existing **Company and Placement Drive concepts from V05**, allowing institutions to track individual student offers and placement outcomes.
-
----
-
- Project Objective
-* Faculty to manage student placement information.
-* Faculty to create and update placement offers.
-* Faculty to track eligible, selected and placed students.
-* Students to view their own placement information.
-* Institutions to calculate placement statistics automatically.
-* Placement officers to analyze company-wise, program-wise and salary-related outcomes.
-
----
-
-## User Interfaces
-
-The system contains two completely separate spaces.
-
-##  Faculty Space
-
-Faculty can:
-
-* Select Academic Year
-* Select Department
-* Select Class/Program
-* View students
-* Search and filter students
-* View eligible students
-* View selected students
-* View placed students
-* View student profiles
-* View placement history
-* Add and update offers
-* Manage companies and placement drives
-* View placement analytics
-
-## Student Space
-
-Students can view only their own information:
-
-* My Profile
-* Eligibility Status
-* Placement Status
-* My Offers
-* Placement History
-* Company and CTC details
-
-Students cannot view or modify other students' information.
-
----
-
-#  Faculty Workflow
-
-```text
-Faculty
-   ↓
-Academic Year
-   ↓
-Department
-   ↓
-Class / Program
-   ↓
-Class Dashboard
-   ↓
-Student List
-   ↓
-Student Profile
-   ↓
-Placement History
-   ↓
-Offer Details
+```bash
+base44 dev
 ```
 
----
+`base44 dev` starts the local Base44 development backend and, when this app is configured for it, also starts the frontend dev server for you. Use the frontend URL printed by the command.
 
-#  Student Workflow
+For example, when the Base44 project config includes a `serveCommand`, `base44 dev` can launch the frontend too:
 
-```text
-Student
-   ↓
-My Dashboard
-   ↓
-My Profile
-   ↓
-My Placement Status
-   ↓
-My Placement History
-   ↓
-My Offers
+```json5
+{
+  "site": {
+    "serveCommand": "npm run dev"
+  }
+}
 ```
 
----
+In a Base44 project this lives in `base44/config.jsonc`.
 
-#  Core Entities
+## Run Only The Frontend
 
-The system uses the following entities:
+If you only want to work on the frontend against the hosted Base44 backend, run:
 
-* Institution
-* Department
-* Program
-* Academic Year
-* Semester
-* Student
-* Faculty
-* Course
-* Company
-* Placement Drive
-* Offer
-
----
-
-
-###  ER Relationship Explanation
-
-* One **Company** can have multiple Placement Drives.
-* One **Placement Drive** can generate multiple Offers.
-* One **Student** can receive multiple Offers.
-* A Student can have **at most one accepted/placed offer**.
-
-Example:
-
-```text
-Mansi
- ├── Infosys → ₹6 LPA → Placed
- ├── TCS     → ₹5 LPA → Pending
- └── Wipro   → ₹4.5 LPA → Not Joined
+```bash
+npm run dev
 ```
 
----
+Open the local URL printed by Vite.
 
-# Required Data
+## Use The Hosted Backend
 
-The system captures:
+For frontend-only development, create or update `.env.local` in the project root:
 
-| Entity          | Important Data                                                    |
-| --------------- | ----------------------------------------------------------------- |
-| Student         | Name, UN Number, Department, Program, Eligibility                 |
-| Company         | Company Name, Industry, Location                                  |
-| Placement Drive | Company, Date, Mode, Status                                       |
-| Offer           | Student, Drive, CTC, Offer Date, Joining Status, Placement Status |
-
----
-
-# Placement Analytics
-
-The system dynamically calculates:
-
-### Eligible Students
-
-Number of unique students marked eligible.
-
-### Students Placed
-
-Number of unique eligible students with a placed offer.
-
-### Placement Percentage
-
-```text
-Placement Percentage =
-Unique Placed Students
----------------------- × 100
-Eligible Students
+```bash
+VITE_BASE44_APP_ID=your_app_id
+VITE_BASE44_APP_BASE_URL=https://your-app.base44.app
 ```
 
-### Salary Statistics
+`VITE_BASE44_APP_ID` identifies the Base44 app.
 
-* Minimum CTC
-* Average CTC
-* Maximum CTC
+`VITE_BASE44_APP_BASE_URL` tells the Base44 Vite plugin where to send local `/api` requests. Point it at your deployed Base44 app URL when you want the local frontend to use the hosted backend.
 
-### Other Insights
+When you use `base44 dev`, the command injects the local Base44 values for you, so `.env.local` is mainly needed for frontend-only workflows.
 
-* Company-wise offers
-* Program-wise placement
-* Joining status
-* Selected students
-* Placed students
-* Pending offers
+## Publish Your Changes
 
-All statistics are calculated dynamically from the database.
+After pushing your changes to git, open the Base44 dashboard and publish the app:
 
----
-
-# Offer Management
-
-Faculty can create an offer using an existing Placement Drive.
-
-When creating an offer:
-
-```text
-Student
-   ↓
-Placement Drive
-   ↓
-Company automatically selected
-   ↓
-CTC
-   ↓
-Offer Date
-   ↓
-Joining Status
-   ↓
-Placement Status
+```bash
+base44 dashboard open
 ```
 
-The Company should be derived from the selected Placement Drive to prevent incorrect company-drive combinations.
+## Docs & Support
 
+Documentation: [https://docs.base44.com/Integrations/Using-GitHub](https://docs.base44.com/Integrations/Using-GitHub)
 
+Base44 CLI command reference: [https://docs.base44.com/developers/references/cli/commands/introduction](https://docs.base44.com/developers/references/cli/commands/introduction)
 
----
-
-# Faculty Student Management
-
-After selecting:
-
-```text
-Academic Year
-      ↓
-Department
-      ↓
-Class / Program
-```
-
-Faculty sees the selected class dashboard.
-
-### Dashboard Cards
-
-* Total Students
-* Eligible Students
-* Selected Students
-* Students Placed
-* Total Offers
-* Placement Percentage
-
-### Student Tabs
-
-```text
-All Students
-Eligible
-Not Eligible
-Offers
-Selected
-Placed
-Not Placed
-```
-
-Faculty can search using:
-
-* Student Name
-* UN Number
-
----
-
-# Student Profile
-
-Faculty can open any student profile.
-
-The profile contains:
-
-* Student Name
-* UN Number
-* Department
-* Program
-* Academic Year
-* Semester
-* Eligibility
-* Selection Status
-* Placement Status
-* Total Offers
-* Placement History
-
-### Placement History
-
-| Company | Drive        |      CTC | Offer Date | Joining    | Placement  |
-| ------- | ------------ | -------: | ---------- | ---------- | ---------- |
-| Infosys | Campus Drive |   ₹6 LPA | 05 Aug     | Joined     | Placed     |
-| TCS     | Campus Drive |   ₹5 LPA | 03 Aug     | Pending    | Not Placed |
-| Wipro   | Campus Drive | ₹4.5 LPA | 01 Aug     | Not Joined | Not Placed |
-
----
-
-# Acceptance Test
-
-The reviewer should be able to perform the following:
-
-1. Enter Faculty Space.
-2. Select Academic Year.
-3. Select Department.
-4. Select Class/Program.
-5. Select an eligible student.
-6. Open the student's Placement History.
-7. Create a new Offer.
-8. Select an existing Placement Drive.
-9. Enter CTC and offer details.
-10. Save the offer.
-11. Return to the dashboard.
-12. Verify that placement statistics have automatically recalculated.
-
-For example:
-
-```text
-Before:
-
-Eligible Students = 30
-Placed Students = 18
-Placement % = 60%
-```
-
-After placing one new student:
-
-```text
-Eligible Students = 30
-Placed Students = 19
-Placement % = 63.33%
-```
-
-The values must be calculated from the database and must not be hard-coded.
-
----
-
-# Dummy Dataset
-
-The system should contain at least:
-
-* 30 eligible students
-* 20+ placement offers
-* 5+ companies
-* 10+ placement drives
-* Different CTC values
-* Different joining statuses
-* Different placement statuses
-* Multiple offers for some students
-
-Example CTC range:
-
-```text
-₹3.5 LPA
-₹4 LPA
-₹4.5 LPA
-₹5 LPA
-₹6 LPA
-₹7 LPA
-₹8 LPA
-₹10 LPA
-₹12 LPA
-```
-
----
-
-# UI Design
-
-
-### Faculty UI
-
-* Sidebar navigation
-* Dashboard cards
-* Search and filters
-* Student tables
-* Charts
-* Status badges
-* Student profile pages
-* Offer forms
-* Reports
-
-### Student UI
-
-Simple and focused interface containing:
-
-* My Dashboard
-* My Profile
-* My Offers
-* My Placement History
-
-### Design Principles
-
-* Clean layout
-* Responsive design
-* Consistent typography
-* Rounded cards
-* Clear tables
-* Minimal animations
-* Professional color palette
-* Mobile responsive
-
-
-
-#  Project Structure
-
-```text
-college-placement-management/
-│
-├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── services/
-│   ├── models/
-│   └── utils/
-│
-├── docs/
-│   ├── er-diagram
-│   └── technology-decision.md
-│
-├── database/
-│   └── schema
-│
-├── README.md
-└── ...
-```
-
----
-
-#  Documentation
-
-The project includes:
-
-### ER Diagram
-
-Shows:
-
-* Entities
-* Attributes
-* Primary Keys
-* Foreign Keys
-* Relationships
-* Cardinalities
-
-
-# Technology Stack
-
-> Update this section with the exact technologies used in the final implementation.
-
-Possible stack:
-
-* **Frontend:** React
-* **Backend:** Node.js / Express
-* **Database:** MySQL
-* **Styling:** CSS / Tailwind CSS
-* **Charts:** Chart.js / Recharts
-* **Version Control:** Git & GitHub
-
----
-
-# Expected Outcome
-
-The final system provides a single platform where faculty can manage and analyze placement outcomes while students can easily view their own placement information.
-
-The application demonstrates:
-
-```text
-CREATE
-  ↓
-VIEW
-  ↓
-SEARCH
-  ↓
-FILTER
-  ↓
-UPDATE
-  ↓
-REPORT
-  ↓
-INSIGHT
-```
-
----
-
-# Live Demonstration
-
-The recommended demonstration flow:
-
-```text
-Welcome Screen
-      ↓
-Faculty Space
-      ↓
-Select Year
-      ↓
-Select Department
-      ↓
-Select Class
-      ↓
-Class Dashboard
-      ↓
-Student List
-      ↓
-Student Profile
-      ↓
-Placement History
-      ↓
-Add / Update Offer
-      ↓
-Dashboard Analytics
-```
-
-Then demonstrate:
-
-```text
-Student Space
-      ↓
-My Dashboard
-      ↓
-My Profile
-      ↓
-My Placement Offers
-```
-
----
+Support: [https://app.base44.com/support](https://app.base44.com/support)
