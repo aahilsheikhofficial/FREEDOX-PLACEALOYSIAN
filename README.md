@@ -37,7 +37,7 @@ The goal is to build a **Placement Offer Management System** on top of the exist
 
 ---
 
-User Interfaces
+## User Interfaces
 
 The system contains two completely separate spaces.
 
@@ -134,27 +134,8 @@ The system uses the following entities:
 
 ---
 
-#  ER Relationship
 
-The important placement relationships are:
-
-```text
-Company
-   │
-   │ 1 : N
-   ↓
-Placement Drive
-   │
-   │ 1 : N
-   ↓
-Offer
-   ↑
-   │ N : 1
-   │
-Student
-```
-
-### Relationship Explanation
+###  ER Relationship Explanation
 
 * One **Company** can have multiple Placement Drives.
 * One **Placement Drive** can generate multiple Offers.
@@ -249,22 +230,7 @@ Placement Status
 
 The Company should be derived from the selected Placement Drive to prevent incorrect company-drive combinations.
 
----
 
-# Business Rules
-
-The system enforces the following rules:
-
-1. A student can have multiple offers.
-2. A student can have only one accepted/placed offer.
-3. A placement drive can have multiple offers.
-4. Every offer must reference an existing student.
-5. Every offer must reference an existing placement drive.
-6. Company is automatically derived from the placement drive.
-7. CTC must be greater than zero.
-8. `Not Joined + Placed` is not allowed.
-9. All statistics must be calculated dynamically.
-10. Editing an offer must apply the same validation rules as creating an offer.
 
 ---
 
@@ -408,7 +374,6 @@ Example CTC range:
 
 # UI Design
 
-The application uses a modern and professional college-management interface.
 
 ### Faculty UI
 
@@ -484,19 +449,6 @@ Shows:
 * Relationships
 * Cardinalities
 
-### Technology Decision
-
-`docs/technology-decision.md` documents:
-
-* Technology selection
-* Database design
-* Architecture decisions
-* Offer entity design
-* Business rules
-* Validation logic
-* Analytics calculations
-
----
 
 # Technology Stack
 
@@ -515,7 +467,7 @@ Possible stack:
 
 # Expected Outcome
 
-The final system should provide a single platform where faculty can manage and analyze placement outcomes while students can easily view their own placement information.
+The final system provides a single platform where faculty can manage and analyze placement outcomes while students can easily view their own placement information.
 
 The application demonstrates:
 
