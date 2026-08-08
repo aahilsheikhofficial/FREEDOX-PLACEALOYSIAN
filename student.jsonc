@@ -1,0 +1,40 @@
+{
+  "name": "Student",
+  "type": "object",
+  "properties": {
+    "un_number": {
+      "type": "string",
+      "title": "UN Number"
+    },
+    "name": {
+      "type": "string",
+      "title": "Student Name"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "program": {
+      "type": "string",
+      "title": "Program"
+    },
+    "academic_year": {
+      "type": "string",
+      "title": "Academic Year"
+    },
+    "semester": {
+      "type": "string",
+      "title": "Semester"
+    },
+    "eligible": {
+      "type": "boolean",
+      "title": "Eligible",
+      "default": true
+    }
+  },
+  "required": [
+    "un_number",
+    "name",
+    "program"
+  ]
+}

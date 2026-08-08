@@ -1,0 +1,48 @@
+{
+  "name": "PlacementDrive",
+  "type": "object",
+  "properties": {
+    "company_id": {
+      "type": "string",
+      "title": "Company"
+    },
+    "drive_name": {
+      "type": "string",
+      "title": "Drive Name"
+    },
+    "drive_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Drive Date"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "Online",
+        "Offline",
+        "Hybrid"
+      ],
+      "title": "Mode"
+    },
+    "eligibility_criteria": {
+      "type": "string",
+      "title": "Eligibility Criteria"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Scheduled",
+        "Completed",
+        "Cancelled"
+      ],
+      "title": "Status",
+      "default": "Scheduled"
+    }
+  },
+  "required": [
+    "company_id",
+    "drive_name",
+    "drive_date",
+    "mode"
+  ]
+}
