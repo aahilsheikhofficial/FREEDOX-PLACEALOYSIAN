@@ -1,4 +1,3 @@
-# 🐼 Pink Pandas — College Placement Management System
 
 > **Team Name:** Pink Pandas
 > **Project:** Placement Offers & Student Placement Management System
