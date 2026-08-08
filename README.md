@@ -1,7 +1,7 @@
 
 > **Team Name:** Pink Pandas
 > **Project:** Placement Offers & Student Placement Management System
-
+**project URL: https://placealoysian.base44.app 
 A web-based placement management system designed to help colleges efficiently manage student placement offers, placement drives, company information, and placement outcomes.
 
 The system provides separate interfaces for **Faculty** and **Students**, while maintaining a centralized placement database.
