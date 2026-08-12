@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+ 
+}
+
+model Institution {
+  id          String       @id @default(uuid())
+  name        String
+  departments Department[]
+}
+
+model Department {
+  id            String      @id @default(uuid())
+  name          String
+  institutionId String
+  institution   Institution @relation(fields: [institutionId], references: [id])
+  programs      Program[]
+}
+
+model Program {
+  id           String     @id @default(uuid())
+  name         String
+  departmentId String
+  department   Department @relation(fields: [departmentId], references: [id])
+  students     Student[]
+}
+
+model AcademicYear {
+  id              String           @id @default(uuid())
+  year            String           // e.g., "2023-2024"
+  students        Student[]
+  placementDrives PlacementDrive[]
+}
+
+model Student {
+  id                 String       @id @default(uuid())
+  registerNumber     String       @unique
+  name               String
+  email              String       @unique
+  programId          String
+  academicYearId     String
+  eligibilityStatus  String       // e.g., "ELIGIBLE", "NOT_ELIGIBLE"
+  program            Program      @relation(fields: [programId], references: [id])
+  academicYear       AcademicYear @relation(fields: [academicYearId], references: [id])
+  offers             Offer[]
+}
+
+model Company {
+  id              String           @id @default(uuid())
+  name            String
+  industry        String
+  location        String
+  placementDrives PlacementDrive[]
+  offers          Offer[]
+}
+
+model PlacementDrive {
+  id             String       @id @default(uuid())
+  companyId      String
+  name           String
+  driveDate      DateTime
+  academicYearId String
+  jobRole        String
+  status         String       // e.g., "UPCOMING", "ONGOING", "COMPLETED"
+  company        Company      @relation(fields: [companyId], references: [id])
+  academicYear   AcademicYear @relation(fields: [academicYearId], references: [id])
+  offers         Offer[]
+}
+
+model Offer {
+  id               String         @id @default(uuid())
+  studentId        String
+  companyId        String
+  placementDriveId String
+  ctc              Float
+  offerDate        DateTime       @default(now())
+  offerStatus      String         // e.g., "OFFERED", "ACCEPTED", "DECLINED", "REJECTED"
+  joiningStatus    String?        // e.g., "JOINED", "PENDING", "NOT_JOINED"
+  placementStatus  String?        // e.g., "PLACED", "UNPLACED"
+  joiningDate      DateTime?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  student          Student        @relation(fields: [studentId], references: [id])
+  company          Company        @relation(fields: [companyId], references: [id])
+  placementDrive   PlacementDrive @relation(fields: [placementDriveId], references: [id])
+
+  @@index([studentId])
+}
